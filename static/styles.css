@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, sans-serif;
+}
+h1 {
+    text-align: center;
+}
+#actions {
+    width: 60%;
+    margin: 0 auto;
+}
+p {
+    background: #f4f4f4;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}

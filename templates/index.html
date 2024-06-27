@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Actions</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>GitHub Actions</h1>
+    <div id="actions">
+        {% for action in actions %}
+            <p>
+                {% if action.action == "push" %}
+                    {{ action.author }} pushed to {{ action.to_branch }} on {{ action.timestamp }}
+                {% elif action.action == "pull_request" %}
+                    {{ action.author }} submitted a pull request from {{ action.from_branch }} to {{ action.to_branch }} on {{ action.timestamp }}
+                {% elif action.action == "merge" %}
+                    {{ action.author }} merged branch {{ action.from_branch }} to {{ action.to_branch }} on {{ action.timestamp }}
+                {% endif %}
+            </p>
+        {% endfor %}
+    </div>
+    <script>
+        setInterval(() => {
+            fetch('/')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('actions').innerHTML = new DOMParser()
+                        .parseFromString(html, 'text/html')
+                        .getElementById('actions').innerHTML;
+                });
+        }, 15000);
+    </script>
+</body>
+</html>
